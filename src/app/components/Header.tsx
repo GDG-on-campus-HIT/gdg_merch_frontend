@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 import 'boxicons/css/boxicons.min.css';
 import { motion } from 'framer-motion';
 
@@ -42,38 +43,38 @@ const Header: React.FC = () => {
 
       {/* Desktop Navigation */}
       <nav className="hidden md:flex items-center gap-16 font-semibold text-xl tracking-wide">
-        <a
-          href="#"
+        <Link
+          href="/"
           className="relative transition-all duration-300 hover:text-[#4285F4]
             after:content-[''] after:absolute after:w-0 after:h-[2px] after:left-0 
             after:-bottom-1 after:bg-[#4285F4] hover:after:w-full after:transition-all after:duration-300"
         >
           HOME
-        </a>
-        <a
-          href="#"
+        </Link>
+        <Link
+          href="/about"
           className="relative transition-all duration-300 hover:text-[#EA4335]
             after:content-[''] after:absolute after:w-0 after:h-[2px] after:left-0 
             after:-bottom-1 after:bg-[#EA4335] hover:after:w-full after:transition-all after:duration-300"
         >
           ABOUT US
-        </a>
-        <a
-          href="#"
+        </Link>
+        <Link
+          href="/project"
           className="relative transition-all duration-300 hover:text-[#FBBC05]
             after:content-[''] after:absolute after:w-0 after:h-[2px] after:left-0 
             after:-bottom-1 after:bg-[#FBBC05] hover:after:w-full after:transition-all after:duration-300"
         >
           PROJECT
-        </a>
-        <a
-          href="#"
+        </Link>
+        <Link
+          href="/new"
           className="relative transition-all duration-300 hover:text-[#34A853]
             after:content-[''] after:absolute after:w-0 after:h-[2px] after:left-0 
             after:-bottom-1 after:bg-[#34A853] hover:after:w-full after:transition-all after:duration-300"
         >
           NEW ARRIVALS
-        </a>
+        </Link>
       </nav>
 
       {/* Desktop Sign In Button */}
@@ -101,22 +102,32 @@ const Header: React.FC = () => {
         className="hidden fixed top-16 bottom-0 right-0 left-0 p-5
         md:hidden z-40 bg-black bg-opacity-70 backdrop-blur-sm"
       >
-        <nav className="flex flex-col gap-6 items-center">
+        {/* Close Button */}
+        <button
+          onClick={toggleMobileMenu}
+          className="absolute top-4 right-5 text-white text-3xl z-50"
+          aria-label="Close Mobile Menu"
+        >
+          <i className="bx bx-x"></i>
+        </button>
+
+        <nav className="flex flex-col gap-6 items-center mt-12">
           {[
-            { text: 'HOME', color: '#4285F4' },
-            { text: 'ABOUT US', color: '#EA4335' },
-            { text: 'PROJECT', color: '#FBBC05' },
-            { text: 'NEW ARRIVALS', color: '#34A853' },
+            { text: 'HOME', path: '/', color: '#4285F4' },
+            { text: 'ABOUT US', path: '/about', color: '#EA4335' },
+            { text: 'PROJECT', path: '/project', color: '#FBBC05' },
+            { text: 'NEW ARRIVALS', path: '/new', color: '#34A853' },
           ].map((item) => (
-            <a
+            <Link
               key={item.text}
-              href="#"
+              href={item.path}
+              onClick={toggleMobileMenu}
               className={`relative transition-all duration-300 hover:text-[${item.color}]
                 after:content-[''] after:absolute after:w-0 after:h-[2px] after:left-0 
                 after:-bottom-1 after:bg-[${item.color}] hover:after:w-full after:transition-all after:duration-300`}
             >
               {item.text}
-            </a>
+            </Link>
           ))}
         </nav>
       </div>
